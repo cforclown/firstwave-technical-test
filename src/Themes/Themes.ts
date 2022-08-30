@@ -1,4 +1,4 @@
-import sidebarPrimaryBg from '../assets/images/sidebar-bg-2.jpg';
+import sidebarPrimaryBg from '../Assets/images/sidebar-bg-2.jpg';
 
 export enum ThemeTypes {
   PRIMARY = 'PRIMARY',
@@ -20,11 +20,17 @@ export interface IThemeHeader {
   color: string;
 }
 
+export interface IThemeMain {
+  background: string;
+  color: string;
+}
+
 export interface ITheme {
   id: ThemeTypes;
   body: string;
   text: string;
   border: string;
+  main: IThemeMain;
   sidebar: IThemeSidebar
   header: IThemeHeader
 }
@@ -34,6 +40,10 @@ export const primaryTheme: ITheme = {
   body: '#fff',
   text: '#3d3d3d',
   border: '#ced6e0',
+  main: {
+    background: '#f53b57',
+    color: '#ffffff',
+  },
   sidebar: {
     background: '#222f3e',
     iconWrapper: '#3d3d3d',
@@ -51,6 +61,10 @@ export const lightTheme: ITheme = {
   body: '#fff',
   text: '#3d3d3d',
   border: '#ced6e0',
+  main: {
+    background: '#a4b0be',
+    color: '#3d3d3d',
+  },
   sidebar: {
     background: '#2f3542',
     color: '#f1f2f6',
@@ -66,6 +80,10 @@ export const darkTheme: ITheme = {
   body: '#2f3542',
   text: '#f1f2f6',
   border: '#747d8c',
+  main: {
+    background: '#3d3d3d',
+    color: '#3d3d3d',
+  },
   sidebar: {
     background: '#3d3d3d',
     color: '#f1f2f6',
@@ -81,6 +99,10 @@ export const redTheme: ITheme = {
   body: '#fff',
   text: '#3d3d3d',
   border: '#ced6e0',
+  main: {
+    background: '#ef5777',
+    color: '#3d3d3d',
+  },
   sidebar: {
     background: '#f53b57',
     color: '#f1f2f6',
@@ -96,6 +118,10 @@ export const purpleTheme: ITheme = {
   body: '#8854d0',
   text: '#3d3d3d',
   border: '#ced6e0',
+  main: {
+    background: '#a55eea',
+    color: '#3d3d3d',
+  },
   sidebar: {
     background: '#8854d0',
     color: '#f1f2f6',

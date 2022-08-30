@@ -1,28 +1,30 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ILayoutStateSidebarStatus } from '../../Reducers/Layout/Layout';
 import Sidebar, { SIDEBAR_SHOW_CLASSNAME } from './Sidebar/Sidebar.style';
 import Header from './Header/Header.style';
 import Content from './Content/Content.style';
 // import Footer from './footer';
-import { IAppState } from '../../Store';
 import {
   ShowSidebar, HideSidebar, CollapseSidebar, UncollapseSidebar,
 } from '../../Reducers/Layout/LayoutActions';
+import { selectSidebarState } from '../../Selectors/LayoutSelector';
+import { selectResource } from '../../Selectors/DataSelector';
+import Page404 from '../404/Page404.style';
+import { WINDOW_SM_THRESHOLD } from '../../Constant/Common';
 
 interface IHome {
   className?:string
 }
 
-export const WINDOW_SM_THRESHOLD = 576;
-
 function HomeBase({ className }: IHome): JSX.Element {
   const ismounted = useRef(false);
   const sidebarWrapperRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
-  const sidebarStatus = useSelector<IAppState>((state) => state.layout.sidebar) as ILayoutStateSidebarStatus;
+  const sidebarState = useSelector(selectSidebarState());
   const [currentWindowWidth, setCurrentWindowWidth] = useState(-1);
+
+  const resource = useSelector(selectResource());
 
   useEffect(() => {
     ismounted.current = true;
@@ -49,12 +51,12 @@ function HomeBase({ className }: IHome): JSX.Element {
 
   const onToggleSidebar = (): void => {
     if (currentWindowWidth > WINDOW_SM_THRESHOLD) {
-      if (!sidebarStatus.collapsed) {
+      if (!sidebarState.collapsed) {
         collapseSidebar();
       } else {
         unCollapseSidebar();
       }
-    } else if (!sidebarStatus.hidden) {
+    } else if (!sidebarState.hidden) {
       hideSidebar();
     } else {
       showSidebar();
@@ -79,16 +81,20 @@ function HomeBase({ className }: IHome): JSX.Element {
     dispatch(HideSidebar());
   };
 
+  if (!resource) {
+    return <Page404 />;
+  }
+
   return (
     <div className={className}>
       <div className="cl-home-left-panel" ref={sidebarWrapperRef}>
-        <Sidebar hidden={sidebarStatus.hidden} collapsed={sidebarStatus.collapsed} />
+        <Sidebar hidden={sidebarState.hidden} collapsed={sidebarState.collapsed} resource={resource} />
         <div className="cl-sidebar-overlay" onClick={hideSidebar} />
       </div>
 
       <div className="cl-home-right-panel">
-        <Header showSidebarToggler={!!sidebarStatus.hidden} onToggleSidebar={onToggleSidebar} />
-        {/* <Content /> */}
+        <Header showSidebarToggler={!!sidebarState.hidden} onToggleSidebar={onToggleSidebar} />
+        <Content resource={resource} />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import defaultAvatar from '../../assets/images/default-avatar.png';
+import defaultAvatar from '../../Assets/images/default-avatar.png';
 import { BootstrapSize } from '../../Types';
 
 export interface IUserAvatar {

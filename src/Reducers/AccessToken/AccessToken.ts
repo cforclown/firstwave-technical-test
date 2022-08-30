@@ -13,7 +13,7 @@ export const accessTokenInitialState: IAccessTokenState = {
 const Reducer = (state: IAccessTokenState = accessTokenInitialState, action: IReducerAction): unknown => {
   if (action.type === AccessTokenActionTypes.SET_SESSION) {
     const newState = JSON.parse(JSON.stringify(state));
-    newState.session = action.param?.session;
+    newState.session = action.params?.session;
     return newState;
   }
   if (action.type === AccessTokenActionTypes.DELETE_SESSION) {

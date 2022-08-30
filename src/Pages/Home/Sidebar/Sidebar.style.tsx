@@ -22,6 +22,11 @@ const Sidebar = styled(SidebarBase)`
     .pro-sidebar { 
       color: ${(props) => props.theme.sidebar.color};
     }
+
+    .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-header img {
+      height: 40px;
+    }
+
     .pro-sidebar-inner {
       background-color: ${(props) => props.theme.sidebar.background};
     }
@@ -89,6 +94,14 @@ const Sidebar = styled(SidebarBase)`
         flex-grow: 10;
         background-color: rgba($color: black, $alpha: 0.5);
       }
+    }
+    
+    .cl-sidebar-section-label {
+      padding-right: 20px;
+      color: ${(props) => props.theme.header.background};
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0.2rem 0;
     }
   }
 `;

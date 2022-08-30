@@ -1,37 +1,38 @@
 import { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import styled from 'styled-components';
+import Explore from '../../../Components/Explore/Explore.style';
 
-import CLLoader from '../../../Components/CLLoader/CLLoader.style';
-import CLSpinner from '../../../Components/CLSpinner/CLSpinner.style';
-import routes from '../Routes';
+import Loader from '../../../Components/Loader/Loader.style';
+import Dashboard from '../../../Components/Dashboard/Dashboard.style';
+import { IResource } from '../../../Types/Metadata';
+import Form from '../../../Components/Form/Form.style';
+import RouteParent from '../../../Components/RouteParent/RouteParent';
+import Resource from '../../Resource/Resource';
+import { FormEdit } from '../../../Components/Form/FormEdit';
 
-const LoaderContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
+export interface IContent {
+  resource: IResource;
+  className?: string;
+}
 
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-`;
+export function ContentBase({ resource, className }: IContent): JSX.Element {
+  const defaultPath = resource.dashboards && resource.dashboards.length ? `/${resource._id}/dashboard/${resource.dashboards[0]._id}`
+    : resource.views && resource.views.length ? `/${resource._id}/explore/${resource.dashboards[0]._id}`
+      : '/404';
 
-export const Loader = (
-  <LoaderContainer>
-    <CLSpinner size="md" />
-  </LoaderContainer>
-);
-
-export function ContentBase({ className }: {className?: string}): JSX.Element {
   return (
-    <div className={className}>
+    <div id="content" className={className}>
       <Suspense fallback={Loader}>
         <Routes>
-          <Route path="/" element={<Navigate replace to="/dashboard" />} />
-          {/* {routes.filter((r) => !!r.component).map((route, index) => (
-            <Route key={index} path={route.path} element={<route.component />} />
-          ))} */}
+          <Route path={resource._id} element={<RouteParent exact={[`/${resource._id}`, `/${resource._id}/`]} redirectTo={defaultPath} />}>
+            <Route path="dashboard/:viewId" element={<Resource Component={Dashboard} />} />
+
+            <Route path="explore/:viewId" element={<Resource Component={Explore} />} />
+
+            <Route path="form/:viewId/:objectId" element={<Resource Component={FormEdit} />} />
+            <Route path="form/:viewId" element={<Resource Component={Form} />} />
+          </Route>
+          <Route path="*" element={<Navigate replace to={defaultPath} />} />
         </Routes>
       </Suspense>
     </div>

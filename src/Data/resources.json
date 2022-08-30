@@ -1,0 +1,123 @@
+{
+  "_id": "admin",
+  "routes": [
+    "/contacts",
+    "/contacts/create",
+    "/contacts/edit"
+  ],
+  "dashboards": [
+    {
+      "_id": "contacts",
+      "label": "Contacts",
+      "tiles": [
+        {
+          "_id": "",
+          "endpoint": "/contacts",
+          "visualization": {
+            "type": "COUNT",
+            "filter": {
+              "_id": "COUNT"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "views": [
+    {
+      "_id": "contacts",
+      "label": {
+        "singular": "Contact",
+        "plural": "Contacts"
+      },
+      "endpoint": "getAllContacts",
+      "actions": [
+        {
+          "_id": "insert-contact",
+          "label": "Insert",
+          "path": "/form/contacts",
+          "endpoint": "insertContact",
+          "confirmation": {
+            "title": "Insert contact",
+            "message": "Are you sure the data entered is correct?"
+          }
+        }
+      ],
+      "rowActions": {
+        "_id": "contacts-row-actions",
+        "label": "Actions",
+        "children": [
+          {
+            "_id": "edit-contact",
+            "label": "Edit",
+            "path": "/form/contacts/{{_id}}",
+            "fetch": "getContact",
+            "endpoint": "updateContact",
+            "confirmation": {
+              "title": "Edit contact",
+              "message": "Are you sure the data entered is correct?"
+            }
+          },
+          {
+            "_id": "delete-contact",
+            "label": "delete",
+            "endpoint": "deleteContact",
+            "confirmation": {
+              "title": "Delete contact",
+              "message": "Are you sure you want to remove this contact?"
+            }
+          }
+        ]
+      },
+      "keyFields": [
+        "_id"
+      ],
+      "fields": [
+        {
+          "_id": "_id",
+          "label": "ID",
+          "align": "left",
+          "type": {
+            "value": "STRING"
+          },
+          "hidden": true
+        },
+        {
+          "_id": "group",
+          "label": "Group",
+          "align": "left",
+          "type": {
+            "value": "STRING",
+            "required": true
+          }
+        },
+        {
+          "_id": "name",
+          "label": "Name",
+          "align": "left",
+          "type": {
+            "value": "STRING",
+            "required": true
+          }
+        },
+        {
+          "_id": "age",
+          "label": "Age",
+          "type": {
+            "value": "NUMBER",
+            "required": true
+          }
+        },
+        {
+          "_id": "mobile",
+          "label": "Mobile",
+          "type": {
+            "value": "STRING",
+            "validation": "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$",
+            "required": true
+          }
+        }
+      ]
+    }
+  ]
+}

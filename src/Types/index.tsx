@@ -20,7 +20,7 @@ export interface IAccessToken {
 
 export interface IReducerAction {
   type: string,
-  param: Record<string, any> | null,
+  params: Record<string, any> | null,
 }
 
 export type SidebarSection = 'TOP' | 'MID' | 'BOTTOM'

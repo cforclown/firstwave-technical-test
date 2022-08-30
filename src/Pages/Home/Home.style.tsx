@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { WINDOW_SM_THRESHOLD } from '../../Constant/Common';
 
-import HomeBase, { WINDOW_SM_THRESHOLD } from './Home';
+import HomeBase from './Home';
 import { SIDEBAR_SHOW_CLASSNAME } from './Sidebar/Sidebar.style';
 
 const Home = styled(HomeBase)`
@@ -13,7 +14,7 @@ const Home = styled(HomeBase)`
   height: 100vh;
   overflow: hidden;
 
-  background-color: #ddddff;
+  background-color: #ffffff;
 
   .cl-home-left-panel {
     display: flex;

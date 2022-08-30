@@ -29,7 +29,7 @@ const LayoutReducer = (state: ILayoutState = layoutDefaultState, action: IReduce
 
   if (action.type === LayoutActionTypes.SHOW_SIDEBAR) {
     newState.sidebar.hidden = false;
-    newState.sidebar.collapsed = !action.param?.uncollapsed;
+    newState.sidebar.collapsed = !action.params?.uncollapsed;
     return newState;
   }
   if (action.type === LayoutActionTypes.HIDE_SIDEBAR) {
@@ -46,7 +46,7 @@ const LayoutReducer = (state: ILayoutState = layoutDefaultState, action: IReduce
     return newState;
   }
   if (action.type === LayoutActionTypes.CHANGE_THEME) {
-    const theme = getTheme(action.param?.themeId);
+    const theme = getTheme(action.params?.themeId);
     if (theme) {
       newState.theme = theme;
     }

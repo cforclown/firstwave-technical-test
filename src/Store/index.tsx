@@ -1,18 +1,18 @@
 import { combineReducers, createStore } from 'redux';
 import AccessTokenReducer, { IAccessTokenState } from '../Reducers/AccessToken/AccessToken';
 import LayoutReducer, { ILayoutState } from '../Reducers/Layout/Layout';
-import MetadataReducer, { IMetadataState } from '../Reducers/Metadata/Metadata';
+import DataReducer, { IDataState } from '../Reducers/Data/Data';
 
 export interface IAppState {
-  layout: ILayoutState,
-  accessToken: IAccessTokenState,
-  metadata: IMetadataState
+  layout: ILayoutState;
+  accessToken: IAccessTokenState;
+  data: IDataState;
 }
 
 const reducers = combineReducers({
   layout: LayoutReducer,
   accessToken: AccessTokenReducer,
-  metadata: MetadataReducer,
+  data: DataReducer,
 });
 
 const Store = createStore(reducers);

@@ -1,4 +1,6 @@
+import Mustache from 'mustache';
 import { BootstrapSizes } from '../Types';
+import { IMetadataAction, IMetadataRowActionChild } from '../Types/Metadata';
 
 export const isNumeric = (value: any): boolean => !isNaN(value);
 export const getBootstrapSizeInNumberic = (size: string | number): number => {
@@ -8,3 +10,10 @@ export const getBootstrapSizeInNumberic = (size: string | number): number => {
 
   return BootstrapSizes[size] ? BootstrapSizes[size] : BootstrapSizes.md;
 };
+
+export const generateRoutePath = (
+  resourceId: string,
+  page: string,
+  view?: Record<string, any>,
+  rootpath = '',
+): string => `${rootpath}${resourceId}${view ? Mustache.render(page as string, view) : page}`;

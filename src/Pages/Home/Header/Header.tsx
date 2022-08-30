@@ -87,7 +87,6 @@ export const HeaderBase = ({ showSidebarToggler, onToggleSidebar, className }: I
 
               <Dropdown.Divider />
 
-              <Dropdown.Divider />
               <Dropdown.Item>
                 <AccountDropdownMenuItem icon={['fas', 'sign-out-alt']} title="Logout" onClick={onLogoutClick} />
               </Dropdown.Item>
