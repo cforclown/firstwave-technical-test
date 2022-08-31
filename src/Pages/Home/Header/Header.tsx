@@ -79,7 +79,7 @@ export const HeaderBase = ({ showSidebarToggler, onToggleSidebar, className }: I
               <Dropdown.Divider />
 
               <Dropdown.Item>
-                <AccountDropdownMenuItem icon={['fas', 'user-circle']} title="Profile" onClick={() => navigate('/profile')} />
+                <AccountDropdownMenuItem icon={['fas', 'user-circle']} title="Profile" onClick={() => navigate('../../profile')} />
               </Dropdown.Item>
               <Dropdown.Item>
                 <AccountDropdownMenuItem icon={['fas', 'cog']} title="Settings" onClick={() => navigate('/settings')} />

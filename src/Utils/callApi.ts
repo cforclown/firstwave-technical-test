@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import * as Realm from 'realm-web';
+import { REALM_APP_ID } from '../Data/config';
 import { ApiEndpoint, IUrlEndpoint } from '../Hooks/useApi';
 
 export const getAxiosMethod = (endpoint: IUrlEndpoint, body: any): Promise<AxiosResponse<any, any>> => {
@@ -45,7 +46,7 @@ export const callApi = async (endpoint: ApiEndpoint, body?: any): Promise<ICallA
 };
 
 export const callRealm = async (endpoint: string, body?: any): Promise<any> => {
-  const app = new Realm.App({ id: 'application-0-cncbf' });
+  const app = new Realm.App({ id: REALM_APP_ID });
   const credentials = Realm.Credentials.anonymous();
   const user = await app.logIn(credentials);
   return user.functions[endpoint](body);

@@ -58,6 +58,7 @@ export interface IMetadataField {
 
 export interface IMetadata {
   _id: string;
+  type: 'default' | 'realm';
   label: {
     singular: string;
     plural: string;
@@ -67,6 +68,7 @@ export interface IMetadata {
   actions: IMetadataAction[];
   rowActions?: IMetadataRowAction;
   keyFields: string[];
+  labelFields?: string[];
   defaultSort?: MetadataSort;
   defaultFilters?: MetadataFilter[];
   fields: IMetadataField[];

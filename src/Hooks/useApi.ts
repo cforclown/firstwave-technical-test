@@ -1,5 +1,5 @@
 import { useFetchAxios } from './useFetchAxios';
-import { useFetchRealm } from './useRealm';
+import { useFetchRealm } from './useFetchRealm';
 
 export interface IUrlEndpoint {
   url: string,
@@ -10,7 +10,7 @@ export type RealmEndpoint = string;
 
 export type ApiEndpoint = RealmEndpoint | IUrlEndpoint;
 
-export interface IUseApiResponse<T> {
+export interface IApiResponse<T> {
   data: T | null;
   loading: boolean;
   error: any;
@@ -23,7 +23,7 @@ interface IUseApiArgs {
   type?: 'url' | 'realm';
 }
 
-export function useApi<T>({ endpoint, body, type }: IUseApiArgs): IUseApiResponse<T> {
+export function useApi<T>({ endpoint, body, type }: IUseApiArgs): IApiResponse<T> {
   return useFetch<T>({
     fetchHandler: type === 'realm' ? useFetchRealm : useFetchAxios,
     endpoint,
@@ -37,6 +37,6 @@ export interface IUseFetchArgs {
   body?: any;
 }
 
-export function useFetch<T>({ fetchHandler, endpoint, body }: IUseFetchArgs): IUseApiResponse<T> {
+export function useFetch<T>({ fetchHandler, endpoint, body }: IUseFetchArgs): IApiResponse<T> {
   return fetchHandler({ endpoint, body });
 }

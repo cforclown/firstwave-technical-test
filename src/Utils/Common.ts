@@ -1,6 +1,5 @@
 import Mustache from 'mustache';
 import { BootstrapSizes } from '../Types';
-import { IMetadataAction, IMetadataRowActionChild } from '../Types/Metadata';
 
 export const isNumeric = (value: any): boolean => !isNaN(value);
 export const getBootstrapSizeInNumberic = (size: string | number): number => {

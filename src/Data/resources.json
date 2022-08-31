@@ -26,6 +26,7 @@
   "views": [
     {
       "_id": "contacts",
+      "type": "realm",
       "label": {
         "singular": "Contact",
         "plural": "Contacts"
@@ -71,6 +72,10 @@
       },
       "keyFields": [
         "_id"
+      ],
+      "labelFields": [
+        "name",
+        "mobile"
       ],
       "fields": [
         {

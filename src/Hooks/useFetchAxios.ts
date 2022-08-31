@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IUrlEndpoint, IUseApiResponse } from './useApi';
+import { IUrlEndpoint, IApiResponse } from './useApi';
 import { getAxiosMethod } from '../Utils/callApi';
 
 export interface IUseFetchAxios {
@@ -7,7 +7,7 @@ export interface IUseFetchAxios {
   body?: any;
 }
 
-export function useFetchAxios<T>({ endpoint, body }: IUseFetchAxios): IUseApiResponse<T> {
+export function useFetchAxios<T>({ endpoint, body }: IUseFetchAxios): IApiResponse<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

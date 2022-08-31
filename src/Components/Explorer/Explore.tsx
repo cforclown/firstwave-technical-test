@@ -3,12 +3,12 @@ import { Button } from 'react-bootstrap';
 import DataTable from '../DataTable/DataTable.style';
 import { generateTableColumns } from '../DataTable/DataTableService';
 import { IMetadataAction } from '../../Types/Metadata';
-import { IResourceChildProps } from '../../Pages/Resource/Resource';
 import { useApi } from '../../Hooks/useApi';
 import Loader from '../Loader/Loader.style';
 import ErrorPanel from '../ErrorPanel/ErrorPanel.style';
+import { IExplorer } from './Explorer';
 
-interface IExplore extends IResourceChildProps{
+interface IExplore extends IExplorer{
   className?: string
 }
 
@@ -29,6 +29,9 @@ export function ExploreBase({ resource, metadata, className }: IExplore): JSX.El
   if (loading) {
     return <Loader />;
   }
+  if (error) {
+    return <ErrorPanel />;
+  }
 
   return (
     <div id="explore" className={className}>
@@ -44,8 +47,8 @@ export function ExploreBase({ resource, metadata, className }: IExplore): JSX.El
       </div>
       <div className="datatable-container">
         {
-          error || !data
-            ? <ErrorPanel />
+          !data || !data.length
+            ? <ErrorPanel message="NO DATA AVAILABLE" />
             : <DataTable columns={columns} data={data} />
         }
       </div>
